@@ -1,0 +1,20 @@
+# IDE files
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# Build output
+out/
+bin/
+*.class
+
+# Logs
+*.log
+*.txt
+db_test_log.txt
+
+# OS files
+.DS_Store
+Thumbs.db
