@@ -71,4 +71,16 @@ public class Commande {
     public void setLignes(List<LigneCommande> lignes) {
         this.lignes = lignes;
     }
+
+    public java.math.BigDecimal getTotalMontant() {
+        java.math.BigDecimal total = java.math.BigDecimal.ZERO;
+        for (LigneCommande l : lignes) {
+            if (l.getProduit() != null && l.getProduit().getPrixAchat() != null) {
+                java.math.BigDecimal lineTotal = l.getProduit().getPrixAchat()
+                        .multiply(new java.math.BigDecimal(l.getQuantite()));
+                total = total.add(lineTotal);
+            }
+        }
+        return total;
+    }
 }

@@ -17,7 +17,8 @@ public class TestServiceMain {
 
         // 2. Stock Service & Observer
         StockService stockService = new StockService();
-        stockService.addObserver(p -> System.out.println("ALERT: Low stock for " + p.getNom()));
+        // stockService.addObserver(p -> System.out.println("ALERT: Low stock for " +
+        // p.getNom()));
 
         System.out.println("Checking stock levels...");
         stockService.checkStockLevels(); // Should trigger alerts if any exist in DB

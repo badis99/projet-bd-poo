@@ -22,5 +22,39 @@ public class ProductController {
         table.setItems(FXCollections.observableArrayList(products));
     }
 
-    // Will add logic for Add/Edit here
+    public void addProduct(Produit p) {
+        try {
+            stockService.saveProduit(p);
+            // Refresh the table currently displayed in the view
+            loadData(view.getTable());
+            showAlert("Succès", "Produit ajouté avec succès !");
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert("Erreur", "Erreur lors de l'ajout du produit: " + e.getMessage());
+        }
+    }
+
+    public void deleteProduct(Produit p) {
+        if (p == null) {
+            showAlert("Avertissement", "Sélectionnez un produit.");
+            return;
+        }
+        try {
+            stockService.deleteProduit(p.getId());
+            loadData(view.getTable());
+            showAlert("Succès", "Produit supprimé.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert("Erreur", "Impossible de supprimer (Probablement lié à des ventes/commandes).");
+        }
+    }
+
+    private void showAlert(String title, String content) {
+        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(
+                javafx.scene.control.Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
 }

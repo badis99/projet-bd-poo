@@ -1,0 +1,3 @@
+@echo off
+echo Running PharmacieApp...
+java -cp "out;lib\*" --module-path "lib" --add-modules javafx.controls,javafx.fxml pharmacie.app.PharmacieApp

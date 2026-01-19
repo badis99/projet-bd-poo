@@ -51,15 +51,32 @@ public class MainDashboardView {
         ventesBtn.setOnAction(e -> controller.showSales());
 
         Button commandesBtn = navButton("Commandes Fournisseur");
+        commandesBtn.setOnAction(e -> controller.showOrders());
+
+        Button clientsBtn = navButton("Clients");
+        clientsBtn.setOnAction(e -> controller.showClients());
 
         Button reportsBtn = navButton("Rapports (Admin)");
         reportsBtn.setOnAction(e -> controller.showReports());
+
+        sidebar.getChildren().addAll(produitsBtn, ventesBtn, commandesBtn, reportsBtn);
+
+        // Add User Button only if Admin
+        if (currentUser.getRole() == pharmacie.model.Role.ADMIN) {
+            Button usersBtn = navButton("Gestion Utilisateurs");
+            usersBtn.setOnAction(e -> controller.showUsers());
+
+            Button suppBtn = navButton("Fournisseurs");
+            suppBtn.setOnAction(e -> controller.showSuppliers());
+
+            sidebar.getChildren().addAll(usersBtn, suppBtn);
+        }
 
         Button logoutBtn = navButton("Déconnexion");
         logoutBtn.setStyle("-fx-background-color: #d9534f; -fx-text-fill: white;");
         logoutBtn.setOnAction(e -> controller.logout());
 
-        sidebar.getChildren().addAll(produitsBtn, ventesBtn, commandesBtn, reportsBtn, new Separator(), logoutBtn);
+        sidebar.getChildren().addAll(new Separator(), logoutBtn);
         mainLayout.setLeft(sidebar);
 
         // --- Center: Content ---

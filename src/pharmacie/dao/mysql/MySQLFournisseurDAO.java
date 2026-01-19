@@ -98,6 +98,7 @@ public class MySQLFournisseurDAO extends AbstractMySQLDAO implements Fournisseur
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 }

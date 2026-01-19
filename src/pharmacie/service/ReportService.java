@@ -10,6 +10,7 @@ public class ReportService {
         strategies = new HashMap<>();
         strategies.put("STOCK", new StockReportStrategy());
         strategies.put("REVENUE", new RevenueReportStrategy());
+        strategies.put("EXPENDITURE", new ExpenditureReportStrategy());
     }
 
     public String generateReport(String type) {
@@ -18,5 +19,13 @@ public class ReportService {
             return "Type de rapport inconnu: " + type;
         }
         return strategy.generateReport();
+    }
+
+    public Map<String, Object> getReportData(String type) {
+        ReportStrategy strategy = strategies.get(type.toUpperCase());
+        if (strategy == null) {
+            return new HashMap<>();
+        }
+        return strategy.getData();
     }
 }
